@@ -1,0 +1,52 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    {{ anime.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">{{ anime.title }}</h1>
+                </div>
+            </div>
+            <div class="d-flex nav">
+                <div class="col offset-md-0">
+                    <div class="col-lg-auto main_content">
+                        <div class="d-flex">
+                            <div class="col-lg-auto col">
+                                <img src="{{ anime.image.url }}" alt="{{ anime.image.url }}" width="250px"
+                                     height="355px">
+                                <div class="tags"> Жанры:
+                                    {% for tag in anime.tags.all %}
+                                        <a href="{% url 'anime_tag' tag %}" class="main_content_tags">
+                                            {{ tag }}
+                                        </a>/
+                                    {% endfor %}
+                                </div>
+                                <div class="tags"> Эпизоды: {{ anime.episode }}</div>
+                                <div class="tags"> Выпуск: {{ anime.date_out }}</div>
+                            </div>
+
+                            <div class="col">
+                                <div class="col-12">
+                                    <div class="anime_content">{{ anime.description }}</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <iframe src="" width="607" height="360" frameborder="0" AllowFullScreen
+                                    allow="autoplay *; fullscreen *"></iframe>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

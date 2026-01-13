@@ -1,0 +1,47 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center h-90">
+        <main class="m-auto w-100 main_authorization">
+
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-2 authorization_name text-center">Вход</div>
+
+                {% for message in messages %}
+                    <div class="alert alert-success">
+                        <a class="close" href="#" data-dismiss="alert">×</a>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+
+                <div class="form-floating pb-2">
+                    <input type="text" class="form-control" id="authorizationLogin" name="login" placeholder="Логин"
+                           required>
+                    <label for="authorizationLogin">Логин</label>
+                </div>
+                <div class="form-floating pb-2">
+                    <input type="password" class="form-control" id="authorizationPassword" name="password"
+                           placeholder="Пароль" required>
+                    <label for="authorizationPassword">Пароль</label>
+                </div>
+
+                <button class="btn w-100 py-2 authorization_button mb-2">Войти</button>
+            </form>
+
+            <div class="d-flex nav">
+                <div class="col-12 text-center">
+                    <a href="{% url 'password-reset' %}" class="authorization_forgot_password">Забыли пароль?</a>
+                </div>
+                <div class="col-12">
+                    <a href="{% url 'registration' %}" class="btn w-100 py-2 authorization_button mt-2">Зарегистрироваться</a>
+                </div>
+            </div>
+
+        </main>
+    </div>
+{% endblock content %}

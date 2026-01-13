@@ -1,0 +1,260 @@
+body{
+    background-image: url("../../main/media/img/main.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+/*Стили для layout.html */
+
+.header-color {
+    background-color: #252525 !important;
+}
+
+.logo-name {
+    color: #159FAD;
+    font-size: 35px;
+    padding-right: 15px;
+    font-family: sans-serif;
+}
+
+.main_button_header {
+    color: #159FAD;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.main_button_header:hover {
+    color: #B4A30D;
+}
+
+.header_form {
+    background-color: #252525;
+    border-color: #159FAD;
+    border-radius: 10px;
+    border-style: solid;
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: .9rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #fff;
+}
+
+.header_form:focus {
+    border-color: #00474d !important;
+    outline: none;
+}
+
+.header_authorization {
+    color: #159FAD;
+    text-decoration: none;
+    font-size: 20px;
+    font-family: sans-serif;
+}
+
+.header_authorization:hover {
+    color: #B4A30D;
+}
+
+input:focus {
+    box-shadow: none !important;
+}
+
+/*Стили для news_index.html*/
+
+.main{
+    margin-top: 50px;
+    background-color: #252525;
+    border-radius: 15px;
+    border: 3px solid #004D2C;
+    margin-bottom: 50px;
+}
+
+.main_h1{
+    background-color: #00474d;
+    border-radius: 0px 15px 0px 15px;
+    margin: 15px;
+    height: 70px;
+    align-content: center;
+}
+
+.main_h1_text{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 30px;
+}
+
+.main_sorting{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.main_filter{
+    padding-right: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+}
+
+.main_filter:hover{
+    color: #B4A30D;
+}
+
+.main_content{
+    margin: 15px;
+    background-color: #00474d;
+    border-radius: 15px;
+}
+
+.main_content_text{
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+
+.main_content_text:hover{
+    color: #B4A30D;
+}
+
+.main_content_h1{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    word-wrap: break-word;
+    padding-top: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.main_content_tags{
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    word-wrap: break-word;
+}
+
+.main_content_tags:hover{
+    color: #B4A30D;
+}
+
+.main_content_eps{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 15px;
+    word-wrap: break-word;
+    padding-right: 15px;
+    padding-bottom: 10px;
+}
+
+/*Стили для страницы anime */
+.tags{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+
+.anime_content{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 18px;
+    word-wrap: break-word;
+}
+
+/*Стили для страницы news */
+
+.news_content{
+    margin: 15px;
+    background-color: #00474d;
+    border-radius: 15px;
+    height: 200px;
+}
+
+.news_content_h1{
+    padding-left: 15px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 20px;
+    word-wrap: break-word;
+    padding-top: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+}
+
+.news_text{
+    max-width: 200px;
+    color: white;
+    padding-left: 15px;
+
+}
+
+/*Стили для страницы авторизации*/
+
+.main_authorization{
+    padding: 50px;
+    background-color: #252525;
+    border-radius: 15px;
+    border: 3px solid #004D2C;
+    max-width: 400px;
+}
+
+.h-90{
+    height: 90%;
+}
+
+.authorization_name{
+    color: #159FAD;
+    text-decoration: none;
+    font-size: 30px;
+    font-family: sans-serif;
+}
+
+.authorization_remember_me{
+    color: #159FAD;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: sans-serif;
+    cursor: pointer;
+}
+
+.authorization_forgot_password{
+    color: #159FAD;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+.authorization_forgot_password:hover{
+    color: #B4A30D;
+}
+
+.authorization_button{
+    background-color: #159FAD;
+    text-decoration: none;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+}
+
+.authorization_button:hover{
+    background-color: #B4A30D;
+}

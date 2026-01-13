@@ -1,0 +1,63 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Новости
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Новости</h1>
+                </div>
+            </div>
+
+            {# Вывод новостей #}
+            <div class="d-flex nav">
+                {% if news %}
+                    {% for el in news %}
+                        <div class="col col-md-6 offset-md-0">
+                            <div class="col-12 col-lg-auto">
+                                <div class="news_content d-flex">
+                                    <div class="col">
+                                        <img src="{{ el.image.url }}" alt="{{ el.image.url }}" width="300px"
+                                             height="200px">
+                                    </div>
+                                    <div class="col">
+                                        <h3 class="news_content_h1">
+                                            <a href="{% url "news_detail" el.id %}"
+                                               class="main_content_text">
+                                                {{ el.title }}
+                                            </a>
+                                        </h3>
+                                        <div class="d-inline-block text-truncate news_text">
+                                            {{ el.description }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Пагинация #}
+            <nav class="list-pages">
+                <ul>
+                    {% for p in news.paginator.page_range %}
+                        {% if news.number == p %}
+                            <li class="page-num page-num-selected">{{ p }}</li>
+                        {% else %}
+                            <li class="page-num">
+                                <a href="?page={{ p }}">{{ p }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+{% endblock content %}

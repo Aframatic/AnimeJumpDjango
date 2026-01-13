@@ -1,0 +1,103 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Недавно вышедшие аниме
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Недавно вышедшие аниме</h1>
+                </div>
+            </div>
+
+            {# Сортировка аниме по тэгам и категориям #}
+            <div class="d-flex">
+                <div class="dropdown main_sorting col-6">
+                    <a href="#" class=" text-decoration-none dropdown-toggle main_sorting" data-bs-toggle="dropdown"
+                       aria-expanded="false">Сортировать по:
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="{% url 'order_by' 'date' %}">Дате добавления</a></li>
+                        <li><a class="dropdown-item" href="{% url 'order_by' 'date_out' %}">Дате выхода</a></li>
+                        <li><a class="dropdown-item" href="{% url 'home' %}">По названию</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown main_sorting col-6 text-end">
+                    <a href="#" class="text-decoration-none main_filter" data-bs-toggle="dropdown"
+                       aria-expanded="false">Фильтр
+                    </a>
+                    <form action="{% url 'filter' %}" method="get">
+                        {% csrf_token %}
+                        <ul class="dropdown-menu text-small">
+                            {% if tags %}
+                                {% for tag in tags %}
+                                    <li>
+                                        <input type="checkbox" id="{{ tag }}" name="tags" value="{{ tag }}">
+                                        <label for="{{ tag }}">{{ tag }}</label>
+                                    </li>
+                                {% endfor %}
+                                <input type="submit" value="Найти">
+                            {% endif %}
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+            {# Вывод аниме #}
+            <div class="d-flex nav">
+                {% if anime %}
+                    {% for el in anime %}
+                        <div class="col col-md-6 offset-md-0">
+                            <div class="col-12 col-lg-auto">
+                                <div class="main_content d-flex">
+                                    <img src="{{ el.image.url }}" alt="{{ el.image.url }}" width="150px"
+                                         height="200px" class="">
+                                    <div class="col">
+                                        <div class="col-12">
+                                            <h3 class="main_content_h1">
+                                                <a href="{% url 'anime_detail' el.id %}"
+                                                   class="main_content_text">{{ el.title }}
+                                                </a>
+                                            </h3>
+                                        </div>
+                                        <div class="col-12 main_content_eps pt-0">
+                                            Эпизод: {{ el.episode }}
+                                        </div>
+                                        <div class="col-12 main_content_eps">
+                                            {% for tag in el.tags.all %}
+                                                <a href="{% url 'anime_tag' tag %}" class="main_content_tags">
+                                                    {{ tag }}
+                                                </a>/
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            {# Пагинация #}
+            <nav class="list-pages">
+                <ul>
+                    {% for p in anime.paginator.page_range %}
+                        {% if anime.number == p %}
+                            <li class="page-num page-num-selected">{{ p }}</li>
+                        {% else %}
+                            <li class="page-num">
+                                <a href="?page={{ p }}">{{ p }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </nav>
+
+        </div>
+    </div>
+
+{% endblock content %}
