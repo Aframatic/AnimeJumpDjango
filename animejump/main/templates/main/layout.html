@@ -35,9 +35,27 @@
             </div>
 
             {% if request.user.is_authenticated %}
-                <div class="text-end nav col-12 col-lg-auto justify-content-center header_authorization">
-                    <a href="{% url 'logout' %}" class="btn header_authorization">Выйти</a>
-                </div>
+                {% if user.is_staff %}
+                    <div class="dropdown text-end nav col-12 col-lg-auto justify-content-center header_authorization">
+                        <a href="#" class="text-decoration-none p-lg-2 header_authorization" data-bs-toggle="dropdown"
+                           aria-expanded="false">Профиль
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="#">Аниме на проверке</a></li>
+                            <li><a class="dropdown-item" href="#">Новости на проверке</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_anime' %}">Добавить аниме</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_tags' %}">Добавить тэг</a></li>
+                            <li><a class="dropdown-item" href="#">Добавить новость</a></li>
+                            <li><a class="dropdown-item" href="#">Пользователи</a></li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
+                        </ul>
+                    </div>
+
+                {% else %}
+                    <div class="text-end nav col-12 col-lg-auto justify-content-center header_authorization">
+                        <a href="{% url 'logout' %}" class="btn header_authorization">Выйти</a>
+                    </div>
+                {% endif %}
             {% else %}
                 <div class="text-end nav col-12 col-lg-auto justify-content-center header_authorization">
                     <a href="{% url 'login' %}" class="btn header_authorization">Войти</a>

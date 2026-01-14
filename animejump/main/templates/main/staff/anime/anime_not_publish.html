@@ -1,0 +1,53 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Неопубликованное аниме</h1>
+                </div>
+            </div>
+
+            {#Сортировка аниме по тэгам и категориям#}
+            <div class="d-flex">
+                <div class="dropdown main_sorting col-6">
+                    <a href="#" class=" text-decoration-none dropdown-toggle main_sorting" data-bs-toggle="dropdown"
+                       aria-expanded="false">Сортировать по:
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                        <li><a class="dropdown-item" href="#">Дате добавления</a></li>
+                        <li><a class="dropdown-item" href="#">Дате выхода</a></li>
+                        <li><a class="dropdown-item" href="#">По названию</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown main_sorting col-6 text-end">
+                    <a href="#" class="text-decoration-none main_filter" data-bs-toggle="dropdown"
+                       aria-expanded="false">Фильтр
+                    </a>
+                    <form action="#" method="get">
+                        {% csrf_token %}
+                        <ul class="dropdown-menu text-small">
+                            {#                        @foreach($filters as $filter)#}
+                            <li>
+                                <input type="checkbox" id="filter" name="tags[]" value="filter id">
+                                <label for="filter">filter</label>
+                            </li>
+                            {#                        @endforeach#}
+                            <input type="submit" value="Найти">
+                        </ul>
+                    </form>
+                </div>
+            </div>
+
+            {#        Вывод аниме#}
+
+
+        </div>
+    </div>
+{% endblock content %}

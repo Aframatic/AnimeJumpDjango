@@ -1,0 +1,75 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Добавить аниме</h1>
+                </div>
+            </div>
+
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+                </div>
+            {% endfor %}
+
+            {#Добавление аниме#}
+            <div class="d-flex nav">
+
+                <form action="{% url 'add_anime' %}" method="post" class="w-100 py-2"
+                      enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="text-white">Название аниме</div>
+                    <div class="form-floating pb-2">
+                        {{ form.title }}
+                        <label for="addAnime">Название аниме</label>
+                    </div>
+
+                    <div class="text-white">Описание</div>
+                    <div class="form-floating pb-2">
+                        {{ form.description }}
+                        <label for="addDescription">Описание</label>
+                    </div>
+
+                    <div class="text-white">Эпизод</div>
+                    <div class="form-floating pb-2">
+                        {{ form.episode }}
+                        <label for="addEpisode">Эпизод</label>
+                    </div>
+
+                    <div class="text-white">Изображение</div>
+                    <div class="form-floating pb-2">
+                        {{ form.image }}
+                        <label for="addImage">Изображение</label>
+                    </div>
+
+                    <div class="dropdown main_sorting col-6">
+                        <a href="#" class="text-decoration-none main_filter" data-bs-toggle="dropdown"
+                           aria-expanded="false">Жанры:
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            {% for tag in tags %}
+                                <li>
+                                    <input type="checkbox" id="{{ tag }}" name="tags" value="{{ tag }}">
+                                    <label for="{{ tag }}">{{ tag }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <button class="btn w-100 py-2 authorization_button" type="submit">Добавить</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Добавить тэг</h1>
+                </div>
+            </div>
+
+            {#Вывод пользователей#}
+            <div class="d-flex nav">
+
+                <form action="{% url 'delete_tag' %}" method="post" class="w-100 py-2">
+                    {% csrf_token %}
+                    <div class="dropdown main_sorting col-6">
+                        <a href="#" class="text-decoration-none main_filter" data-bs-toggle="dropdown"
+                           aria-expanded="false">Уже добавленные тэги:
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            {% for tag in tags %}
+                                <li>
+                                    <input type="checkbox" id="{{ tag }}" name="tag" value="{{ tag.id }}">
+                                    <label for="{{ tag }}">{{ tag }}</label>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <button class="btn w-100 py-2 authorization_button" type="submit">Удалить</button>
+                </form>
+
+                <form action="{% url 'add_tags' %}" method="post" class="w-100 py-2">
+                    {% csrf_token %}
+                    <div class="text-white">Название тэга</div>
+                    <div class="form-floating pb-2">
+                        <input type="text" class="form-control" id="addTags" name="tag"
+                               placeholder="Название аниме" required autocomplete="off">
+                        <label for="addTags">Название тэга</label>
+                    </div>
+
+                    <button class="btn w-100 py-2 authorization_button" type="submit">Добавить</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

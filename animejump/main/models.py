@@ -8,7 +8,7 @@ class Anime(models.Model):
     episode = models.CharField('Эпизод', max_length=20, default="0")
     image = models.ImageField("Картинка", upload_to="img/")
     description = models.TextField("Описание")
-    date_out = models.DateField("Дата выхода")
+    date_out = models.DateField("Дата выхода", default=now)
     date_time = models.DateTimeField("Дата и время", default=now)
     tags = TaggableManager()
     published = models.BooleanField('Статус', default=False)
