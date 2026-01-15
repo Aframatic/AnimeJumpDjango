@@ -1,0 +1,52 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    Авторизация
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="main">
+
+            <div class="main_h1">
+                <div class="col align-content-center">
+                    <h1 class="main_h1_text">Добавить новость</h1>
+                </div>
+            </div>
+
+            {#Добавление новости#}
+            <div class="d-flex nav">
+                <form action="{% url 'add_news' %}" method="post" class="w-100 py-2" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="text-white">Название новости</div>
+                    <div class="form-floating pb-2">
+                        {{ form.title }}
+                        <label for="addNews">Название новости</label>
+                    </div>
+
+                    <div class="text-white">Описание</div>
+                    <div class="form-floating pb-2">
+                        {{ form.description }}
+                        <label for="addDescription">Описание</label>
+                    </div>
+
+                    <div class="text-white">Полная статья</div>
+                    <div class="form-floating pb-2">
+                        {{ form.full_text }}
+                        <label for="addFullText">Полная статья</label>
+                    </div>
+
+                    <div class="text-white">Изображение</div>
+                    <div class="form-floating pb-2">
+                        {{ form.image }}
+                        <label for="registrationConfirmPassword">Изображение</label>
+                    </div>
+
+                    <button class="btn w-100 py-2 authorization_button" type="submit">Добавить</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

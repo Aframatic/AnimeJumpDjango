@@ -41,11 +41,11 @@
                            aria-expanded="false">Профиль
                         </a>
                         <ul class="dropdown-menu text-small">
-                            <li><a class="dropdown-item" href="#">Аниме на проверке</a></li>
-                            <li><a class="dropdown-item" href="#">Новости на проверке</a></li>
+                            <li><a class="dropdown-item" href="{% url 'anime_not_published' %}">Аниме на проверке</a></li>
+                            <li><a class="dropdown-item" href="{% url 'news_not_published' %}">Новости на проверке</a></li>
                             <li><a class="dropdown-item" href="{% url 'add_anime' %}">Добавить аниме</a></li>
                             <li><a class="dropdown-item" href="{% url 'add_tags' %}">Добавить тэг</a></li>
-                            <li><a class="dropdown-item" href="#">Добавить новость</a></li>
+                            <li><a class="dropdown-item" href="{% url 'add_news' %}">Добавить новость</a></li>
                             <li><a class="dropdown-item" href="#">Пользователи</a></li>
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Выйти</a></li>
                         </ul>

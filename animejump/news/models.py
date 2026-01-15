@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 
 class News(models.Model):
@@ -6,8 +7,8 @@ class News(models.Model):
     image = models.ImageField("Картинка", upload_to="img/")
     description = models.CharField("Описание", max_length=500)
     full_text = models.TextField("Полная статья")
-    date_out = models.DateField("Дата выхода")
-    date_time = models.DateTimeField("Дата и время")
+    date_out = models.DateField("Дата выхода", default=now)
+    date_time = models.DateTimeField("Дата и время", default=now)
     published = models.BooleanField('Статус', default=False)
 
     def __str__(self):

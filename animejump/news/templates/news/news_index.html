@@ -36,6 +36,9 @@
                                             {{ el.description }}
                                         </div>
                                     </div>
+                                    {% if user.is_staff %}
+                                        <a href="#">Редактировать</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

@@ -14,39 +14,6 @@
                 </div>
             </div>
 
-            {# Сортировка аниме по тэгам и категориям #}
-            <div class="d-flex">
-                <div class="dropdown main_sorting col-6">
-                    <a href="#" class=" text-decoration-none dropdown-toggle main_sorting" data-bs-toggle="dropdown"
-                       aria-expanded="false">Сортировать по:
-                    </a>
-                    <ul class="dropdown-menu text-small">
-                        <li><a class="dropdown-item" href="{% url 'order_by' 'date' %}">Дате добавления</a></li>
-                        <li><a class="dropdown-item" href="{% url 'order_by' 'date_out' %}">Дате выхода</a></li>
-                        <li><a class="dropdown-item" href="{% url 'home' %}">По названию</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown main_sorting col-6 text-end">
-                    <a href="#" class="text-decoration-none main_filter" data-bs-toggle="dropdown"
-                       aria-expanded="false">Фильтр
-                    </a>
-                    <form action="{% url 'filter' %}" method="get">
-                        {% csrf_token %}
-                        <ul class="dropdown-menu text-small">
-                            {% if tags %}
-                                {% for tag in tags %}
-                                    <li>
-                                        <input type="checkbox" id="{{ tag }}" name="tags" value="{{ tag }}">
-                                        <label for="{{ tag }}">{{ tag }}</label>
-                                    </li>
-                                {% endfor %}
-                                <input type="submit" value="Найти">
-                            {% endif %}
-                        </ul>
-                    </form>
-                </div>
-            </div>
-
             {# Вывод аниме #}
             <div class="d-flex nav">
                 {% if anime %}
@@ -55,13 +22,11 @@
                             <div class="col-12 col-lg-auto">
                                 <div class="main_content d-flex">
                                     <img src="{{ el.image.url }}" alt="{{ el.image.url }}" width="150px"
-                                         height="200px">
+                                         height="200px" class="">
                                     <div class="col">
                                         <div class="col-12">
                                             <h3 class="main_content_h1">
-                                                <a href="{% url 'anime_detail' el.id %}"
-                                                   class="main_content_text">{{ el.title }}
-                                                </a>
+                                                {{ el.title }}
                                             </h3>
                                         </div>
                                         <div class="col-12 main_content_eps pt-0">
@@ -69,14 +34,12 @@
                                         </div>
                                         <div class="col-12 main_content_eps">
                                             {% for tag in el.tags.all %}
-                                                <a href="{% url 'anime_tag' tag %}" class="main_content_tags">
-                                                    {{ tag }}
-                                                </a>/
+                                                {{ tag }} /
                                             {% endfor %}
                                         </div>
                                     </div>
                                     {% if user.is_staff %}
-                                        <a href="#">Редактировать</a>
+                                        <a href="{% url 'anime_edit' el.pk %}">Редактировать</a>
                                     {% endif %}
                                 </div>
                             </div>

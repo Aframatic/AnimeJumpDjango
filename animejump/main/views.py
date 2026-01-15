@@ -4,7 +4,9 @@ from .models import Anime
 from django.views.generic import DetailView, ListView
 from django.core.paginator import Paginator
 from taggit.models import Tag
-from .forms import *
+from .forms import AddAnime, TagForm, AnimeNotPublished
+from django.utils.timezone import now
+from django.shortcuts import redirect
 
 
 def index(request, type=None, tag=None):
@@ -85,6 +87,56 @@ def delete_tag(request):
         id = request.POST.get("tag", False)
         Tag.objects.filter(pk=id).delete()
     return render(request, 'main/staff/add_tags.html', {'tags': tags})
+
+
+def anime_not_published(request):
+    anime = Anime.objects.all().order_by('title').filter(published=False)
+    filters = request.GET.getlist("tags")
+    if filters:
+        tags = Tag.objects.filter(name__in=filters)
+        id = tags.values_list('id')
+        anime = Anime.objects.filter(tags__pk__in=id).distinct().filter(published=False)
+    tags = Tag.objects.all()
+    paginator = Paginator(anime, 3)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'main/staff/anime/anime_not_published.html', {'anime': page_obj, 'tags': tags})
+
+
+def anime_edit(request, pk=None):
+    anime = Anime.objects.get(pk=pk)
+    tags = anime.tags.all()
+    all_tags = Tag.objects.all()
+    anime_tags = []
+    no_anime_tags = []
+    checked_tags = request.POST.getlist("checked_tags")
+    for tag in tags:
+        anime_tags.append(tag.name)
+    for all_tag in all_tags:
+        if all_tag.name in anime_tags:
+            continue
+        else:
+            no_anime_tags.append(all_tag.name)
+    if request.method == "POST":
+        form = AnimeNotPublished(request.POST, request.FILES, instance=anime)
+        if form.is_valid():
+            anime = form.save(commit=False)
+            anime.author = request.user
+            anime.date_time = now()
+            anime.save()
+            anime.tags.clear()
+            for check_tag in checked_tags:
+                anime.tags.add(check_tag)
+            return redirect('anime_not_published')
+    else:
+        form = AnimeNotPublished(instance=anime)
+    return render(request, 'main/staff/anime/anime_edit.html',
+                  {
+                      'form': form,
+                      'tags': tags,
+                      'no_anime_tags': no_anime_tags,
+                      'id': anime.id
+                  })
 
 # class AnimeListView(ListView):
 #     model = Anime
