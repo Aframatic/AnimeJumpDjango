@@ -76,7 +76,7 @@
                                         </div>
                                     </div>
                                     {% if user.is_staff %}
-                                        <a href="#">Редактировать</a>
+                                        <a href="{% url 'anime_edit' el.pk %}">Редактировать</a>
                                     {% endif %}
                                 </div>
                             </div>

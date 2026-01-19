@@ -1,7 +1,7 @@
 {% extends 'main/layout.html' %}
 
 {% block title %}
-    Новости
+    Неопубликованные новости
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 
             <div class="main_h1">
                 <div class="col align-content-center">
-                    <h1 class="main_h1_text">Новости</h1>
+                    <h1 class="main_h1_text">Неопубликованные новости</h1>
                 </div>
             </div>
 
@@ -27,10 +27,7 @@
                                     </div>
                                     <div class="col">
                                         <h3 class="news_content_h1">
-                                            <a href="{% url "news_detail" el.id %}"
-                                               class="main_content_text">
-                                                {{ el.title }}
-                                            </a>
+                                            {{ el.title }}
                                         </h3>
                                         <div class="d-inline-block text-truncate news_text">
                                             {{ el.description }}

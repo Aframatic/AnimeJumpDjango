@@ -1,4 +1,6 @@
 from django import forms
+from .models import News
+from django.forms import ModelForm
 
 
 class AddNews(forms.Form):
@@ -22,12 +24,12 @@ class AddNews(forms.Form):
                                  'required': 'Поле обязательно',
                              })
     full_text = forms.CharField(label='Описание',
-                                  required=True,
-                                  max_length=1500,
-                                  error_messages={
-                                      'required': 'Поле обязательно',
-                                      'max_length': 'Максимум 1500 символов',
-                                  })
+                                required=True,
+                                max_length=1500,
+                                error_messages={
+                                    'required': 'Поле обязательно',
+                                    'max_length': 'Максимум 1500 символов',
+                                })
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,3 +53,9 @@ class AddNews(forms.Form):
             'id': 'addFullText',
             'placeholder': 'Полная статья',
         })
+
+
+class NewsNotPublished(forms.ModelForm):
+    class Meta:
+        model = News
+        fields = ['title', 'description', 'full_text', 'image', 'published']

@@ -1,10 +1,11 @@
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .models import Anime
 from django.views.generic import DetailView, ListView
 from django.core.paginator import Paginator
 from taggit.models import Tag
-from .forms import AddAnime, TagForm, AnimeNotPublished
+from .forms import AddAnime, TagForm, AnimeNotPublished, UsersPublish
 from django.utils.timezone import now
 from django.shortcuts import redirect
 

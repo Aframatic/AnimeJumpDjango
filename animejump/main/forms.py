@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from .models import Anime
+from django.contrib.auth.models import User
 
 
 class AddAnime(forms.Form):
@@ -52,10 +53,18 @@ class AddAnime(forms.Form):
             'placeholder': 'Изображение',
         })
 
+
 class TagForm(forms.Form):
     tag = forms.CharField(label='Tag', max_length=100)
+
 
 class AnimeNotPublished(forms.ModelForm):
     class Meta:
         model = Anime
         fields = ['title', 'description', 'episode', 'image', 'published']
+
+
+class UsersPublish(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['email']

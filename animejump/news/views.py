@@ -1,9 +1,11 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from .models import News
 from django.views.generic import DetailView
 from django.core.paginator import Paginator
-from .forms import AddNews
+from .forms import AddNews, NewsNotPublished
+from django.utils.timezone import now
+from django.shortcuts import redirect
 
 
 def index(request):
@@ -41,4 +43,23 @@ def news_not_published(request):
     paginator = Paginator(news, 3)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, 'news/news_index.html', {'news': page_obj})
+    return render(request, 'staff/news/news_not_published.html', {'news': page_obj})
+
+
+def news_edit(request, pk=None):
+    news = News.objects.get(pk=pk)
+    if request.method == "POST":
+        form = NewsNotPublished(request.POST, request.FILES, instance=news)
+        if form.is_valid():
+            news = form.save(commit=False)
+            news.author = request.user
+            news.date_time = now()
+            news.save()
+            return redirect('news_not_published')
+    else:
+        form = NewsNotPublished(instance=news)
+    return render(request, 'staff/news/news_edit.html',
+                  {
+                      'form': form,
+                      'id': news.id
+                  })

@@ -1,7 +1,7 @@
 {% extends 'main/layout.html' %}
 
 {% block title %}
-    Авторизация
+    Редактирование новости
 {% endblock %}
 
 {% block content %}
@@ -10,76 +10,46 @@
 
             <div class="main_h1">
                 <div class="col align-content-center">
-                    <h1 class="main_h1_text">Редактирование аниме</h1>
+                    <h1 class="main_h1_text">Редактирование новости</h1>
                 </div>
             </div>
 
-            {#        Вывод пользователей#}
+            {#Редактирование новости#}
             <div class="card shadow border-0 mb-7">
                 <div class="table-responsive">
-                    <form action="#}" method="post">
+                    <form action="{% url 'news_edit' id %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <input type="hidden" name="id" value="id">
                         <table class="table table-hover table-nowrap">
                             <thead class="thead-light">
+
                             <tr>
                                 <th scope="col">Название</th>
-                                <td><input type="text" class="text" name="name" value="#"/></td>
+                                <td>
+                                    {{ form.title }}
                             </tr>
                             <tr>
                                 <th scope="col">Картинка</th>
                                 <td>
-                                    <label for="img">img</label>
-                                    <input id="img" type="file" name="img" accept="image/png, image/jpeg, image/jpg"
-                                           value="img"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Жанры</th>
-                                <td>
-                                    {#                                @foreach($anime->tags as $tag)#}
-                                    <input type="checkbox" class="text" name="checked_tags[]" id="tag"
-                                           checked
-                                           value="tag"/>
-                                    <label for="tag">tag</label>
-                                    {#                                @endforeach#}
-                                    {#                                @foreach($filters as $filter)#}
-                                    <input type="checkbox" class="text" name="checked_tags[]" id="filter"
-                                           value="filter id"/>
-                                    <label for="filter">filter</label>
-                                    {#                                @endforeach#}
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Эпизод</th>
-                                <td><input type="number" class="text" name="episode"
-                                           value="#"/>
+                                    <label for="img">{{ form.image.url }}</label>
+                                    {{ form.image }}
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="col">Описание</th>
-                                <td><input type="text" class="text" name="description"
-                                           value="#"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Видео</th>
-                                <td><input type="url" class="text" name="video"
-                                           value="#"/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="col">Аниме опубликована</th>
                                 <td>
-                                    <select name="publish_at">
-                                        {#                                    @if(empty($anime->publish_at))#}
-                                        <option value="">Нет</option>
-                                        <option value="{{ now() }}">Да</option>
-                                        {#                                    @else#}
-                                        <option value="{{ now() }}">Да</option>
-                                        <option value="">Нет</option>
-                                        {#                                    @endif#}
-                                    </select>
+                                    {{ form.description }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Полная статья</th>
+                                <td>
+                                    {{ form.full_text }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Новость опубликована</th>
+                                <td>
+                                    {{ form.published }}
                                 </td>
                             </tr>
                             <input type="submit" class="btn btn-sm btn-neutral" value="Сохранить">
